@@ -55,7 +55,7 @@
           if (globalUnityInstance) {
             const payloadString = JSON.stringify(filteredPayload);
             console.log("Data sent");
-            globalUnityInstance.SendMessage("AuthBridge", "ReceiveAuthToken", payloadString);
+            globalUnityInstance.SendMessage("AuthenticationBridge", "ReceiveAuthToken", payloadString);
           }
         }
       } catch (error) {
