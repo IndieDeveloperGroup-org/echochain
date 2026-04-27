@@ -32,7 +32,7 @@
    
       const params = new URLSearchParams(window.location.search);
       const authToken = params.get("authToken");
-
+      console.log("On unity ready called");
       try {
         const response = await fetch(`https://idgrwebsite.onrender.com/games/play/echochain`, {
           method: "POST",
@@ -43,7 +43,7 @@
         });
 
         const data = await response.json();
-
+        
         if (data.success && data.payload) {
           const filteredPayload = {
             accessToken: data.payload.unityIdToken,
@@ -54,6 +54,7 @@
 
           if (globalUnityInstance) {
             const payloadString = JSON.stringify(filteredPayload);
+            console.log("Data sent");
             globalUnityInstance.SendMessage("AuthBridge", "ReceiveAuthToken", payloadString);
           }
         }
@@ -153,6 +154,7 @@
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
               }).then((unityInstance) => {
                  globalUnityInstance = unityInstance;
+                console.log("Cached global On unity instance");
                 document.querySelector("#unity-loading-bar").style.display = "none";
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
