@@ -29,38 +29,38 @@
 
       window.onUnityReady = async function () {
    
-      const params = new URLSearchParams(window.location.search);
-      const authToken = params.get("authToken");
-      console.log("On unity ready called");
-      try {
-        const response = await fetch(`https://idgrwebsite.onrender.com/games/play/echo-chain`, {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${authToken}`,
-            "Content-Type": "application/json"
-          }
-        });
+   const params = new URLSearchParams(window.location.search);
+   const authToken = params.get("authToken");
+   console.log("On unity ready called");
+   try {
+     const response = await fetch(`https://idgrwebsite.onrender.com/games/play/echo-chain`, {
+       method: "POST",
+       headers: {
+         "Authorization": `Bearer ${authToken}`,
+         "Content-Type": "application/json"
+       }
+     });
 
-        const data = await response.json();
-        
-        if (data.success && data.payload) {
-          const filteredPayload = {
-            accessToken: data.payload.unityIdToken,
-            sessionToken: data.payload.unitySessionToken
-          };
+     const data = await response.json();
+     
+     if (data.success && data.payload) {
+       const filteredPayload = {
+         accessToken: data.payload.unityIdToken,
+         sessionToken: data.payload.unitySessionToken
+       };
 
-          console.log("✅ Filtered Payload Ready:");
+       console.log("✅ Filtered Payload Ready:");
 
-          if (globalUnityInstance) {
-            const payloadString = JSON.stringify(filteredPayload);
-            console.log("Data sent");
-            globalUnityInstance.SendMessage("AuthManager", "ReceiveAuthToken", payloadString);
-          }
-        }
-      } catch (error) {
-        console.error("Auth failed:", error.message);
-      }
-    }
+       if (globalUnityInstance) {
+         const payloadString = JSON.stringify(filteredPayload);
+         console.log("Data sent");
+         globalUnityInstance.SendMessage("AuthManager", "ReceiveAuthToken", payloadString);
+       }
+     }
+   } catch (error) {
+     console.error("Auth failed:", error.message);
+   }
+ }
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
