@@ -91,9 +91,9 @@
       var loaderUrl = buildUrl + "/echochain.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/echochain.data.gz",
-        frameworkUrl: buildUrl + "/echochain.framework.js.gz",
-        codeUrl: buildUrl + "/echochain.wasm.gz",
+        dataUrl: buildUrl + "/echochain.data.unityweb",
+        frameworkUrl: buildUrl + "/echochain.framework.js.unityweb",
+        codeUrl: buildUrl + "/echochain.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "UnmboxGames",
         productName: "EchoChain",
@@ -153,7 +153,6 @@
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
               }).then((unityInstance) => {
                 globalUnityInstance = unityInstance;
-                console.log("Cached global On unity instance");
                 document.querySelector("#unity-loading-bar").style.display = "none";
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
